@@ -20,7 +20,15 @@
 #	   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #	   MA 02110-1301, USA.
 
-
+# TODO #######################
+#
+# Emotes in chat return extra spaces, fix that
+#
+#
+#
+#
+#
+###############################
 import urllib2
 import json
 from BeautifulSoup import BeautifulSoup
@@ -163,4 +171,5 @@ def h2t(text):
 	text = text.replace('&#39;',"'")
 	text = text.replace('\\',"\\\\")
 	text = text.replace('&quot;','''\\"''')
+	text = text.replace('&amp;','&')
 	return text
