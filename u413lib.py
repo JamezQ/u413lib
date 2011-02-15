@@ -23,11 +23,15 @@
 # TODO #######################
 #
 # Emotes in chat return extra spaces, fix that
+# Fix htmlentities
+# 
+# Make a __action__ method, adding channels, users, or so on.
+# Make client.login() automatically append client.channels if True
+# Make client.joinchat() append to client.chatters[]
+# Make a log() method to write all chat to a file
 #
-#
-#
-#
-#
+# client.joinchat() gets userlist in that chat.
+# Crases on /users and /help
 ###############################
 import urllib2
 import json
