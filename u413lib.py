@@ -188,5 +188,6 @@ def h2t(text):
 	text = text.replace('&#39;',"'")
 	text = text.replace('\\',"\\\\")
 	text = text.replace('&quot;','''\\"''')
+	text = text.replace('&#160;','''\xc2\xa0''')
 	text = text.replace('&amp;','&')
 	return text
