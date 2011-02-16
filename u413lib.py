@@ -32,6 +32,9 @@
 #
 # client.joinchat() gets userlist in that chat.
 # Crases on /users and /help
+#
+# Make joinchat join a chat if client.channels does contain the joinchat
+# channel.
 ###############################
 import urllib2
 import json
