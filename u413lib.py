@@ -149,7 +149,7 @@ def parse_chat(parsedata):
 						message_dict['Msg'] += text
 					except IndexError:
 						if str(text) == "<br />":
-							message_dict['Msg'] += u"<br />"
+							message_dict['Msg'] += '\n'
 						else:
 							raise
 				message_dict['Msg'] = message_dict['Msg'][5:-1]
@@ -164,7 +164,7 @@ def parse_chat(parsedata):
 						message_dict['Msg'] += text
 					except IndexError:
 						if str(text) == "<br />":
-							message_dict['Msg'] += u"<br />"
+							message_dict['Msg'] += '\n'
 						else:
 							raise
 				if message_dict['Msg'][-1] == " ":
