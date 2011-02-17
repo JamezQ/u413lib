@@ -35,6 +35,10 @@
 #
 # Make joinchat join a chat if client.channels does contain the joinchat
 # channel.
+#
+# Make all client.joinchat() just a link to client.chatters[]
+# Make chat.get (without ()) equal the last chat.get()
+#
 ###############################
 import urllib2
 import json
