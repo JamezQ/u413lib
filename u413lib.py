@@ -182,6 +182,8 @@ def parse_chat(parsedata):
 			#Get Timestamps
 			message_dict['Timestamp'] = message.contents[-1].contents[0]
 			message_dict['Msg'] = unicode(BeautifulStoneSoup(message_dict['Msg'],convertEntities=BeautifulStoneSoup.HTML_ENTITIES ))
+			message_dict['User'] = unicode(BeautifulStoneSoup(message_dict['User'],convertEntities=BeautifulStoneSoup.HTML_ENTITIES ))
+			message_dict['Msg'] = message_dict['Msg'].replace("U413.com","www.U413.com")
 			
 			messagelist[i] = message_dict
 			i += 1
