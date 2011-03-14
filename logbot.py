@@ -2,7 +2,7 @@ import u413lib
 import time
 def main():
 	logger = u413lib.createclient()
-	logger.login('logbot','logger')
+	logger.login('USER','PASS')
 	chatter = logger.joinchat('general')
 	
 	while True:

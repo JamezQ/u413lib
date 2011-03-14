@@ -32,7 +32,6 @@
 import u413lib
 import time
 import random
-chat = "penis"
 CK = '@'
 
 laioni = False
@@ -85,7 +84,7 @@ def main():
 	global laioni
 	global chat
 	client = u413lib.createclient()
-	if not client.login('qbot','chatpass'):
+	if not client.login('USER','PASS'):
 		exit()
 	chat = client.joinchat('general')
 	client.sendRawCommand('channel general')
