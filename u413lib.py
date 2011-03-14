@@ -23,7 +23,6 @@
 # TODO #######################
 #
 # Emotes in chat return extra spaces, fix that
-# Fix htmlentities
 # 
 # Make a __action__ method, adding channels, users, or so on.
 # Make client.login() automatically append client.channels if True
