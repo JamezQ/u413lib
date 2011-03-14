@@ -39,25 +39,33 @@
 # Make all client.joinchat() just a link to client.chatters[]
 # Make chat.get (without ()) equal the last chat.get()
 #
+# Find out char limits for post/title/reply/chat and embed those limits in u413lib
 ###############################
 import urllib2
 import json
 from BeautifulSoup import BeautifulSoup
+from BeautifulSoup import BeautifulStoneSoup
 class createclient(object):
 	"""create a client, with a cookiejar"""
-	def __init__(self):
+	def __init__(self,user=False,password=False):
 		self.o = urllib2.build_opener( urllib2.HTTPCookieProcessor() )
 		urllib2.install_opener( self.o )
+		self.loggedin = False
+		if user and password:
+			self.login(user,password)
 	def login(self,username,password):
 		"""Attempt to login, return True if succesful, False otherwise"""
 		data = self.sendRawCommand('login '+username+' '+password)
 		data = json.loads(data)
 		data = data['DisplayArray'][0]['Text']
 		if "You are already" in data:
+			self.loggedin = True
 			return True
 		elif "You are now" in data:
+			self.loggedin = True
 			return True
 		else:
+			self.loggedin = False
 			return False
 	def sendRawCommand(self,command):
 		"""Send a raw command and get raw json back"""
@@ -98,19 +106,16 @@ class createclient(object):
 			else:
 				return False
 		def send(self,chatstring):
-			"""Send string to chat chatter in in"""
+			"""Send string to chat chatter is in"""
+			chatstring = str(chatstring)
+			chatstring = make_send_safe(chatstring)
 			cmd = "channel "
 			cmd += self.channel
 			cmd += ' '
 			cmd += chatstring
-			cmd = cmd.encode('utf8')
-			chat = self.me.sendRawCommand(h2t(cmd))
-			chat = parse_chat(chat)
-			if chat:
-				return chat[self.channel]
-			else:
-				return False
+			cmd = cmd.encode('utf-8')
 			
+			self.me.sendRawCommand(cmd)
 			
 def parse_chat(parsedata):
 	"""Parse chat data, put in dictionary"""
@@ -175,23 +180,16 @@ def parse_chat(parsedata):
 					message_dict['Msg'] = message_dict['Msg'][:-1]
 			elif message_dict['Type'] is u"Announcement":
 				message_dict['Msg'] += message.contents[2][1:-4]
-			message_dict['Msg'] = message_dict['Msg']
 			#Get Timestamps
 			message_dict['Timestamp'] = message.contents[-1].contents[0]
-			
+			message_dict['Msg'] = unicode(BeautifulStoneSoup(message_dict['Msg'],convertEntities=BeautifulStoneSoup.HTML_ENTITIES ))
 			
 			messagelist[i] = message_dict
 			i += 1
 		parsed_chat_data[channel] = messagelist
 	return parsed_chat_data
-
-def h2t(text):
-	"""Convert Html to Text"""
-	text = text.replace('&lt;','<')
-	text = text.replace('&gt;','>')
-	text = text.replace('&#39;',"'")
+def make_send_safe(text):
+	"""Make text safe to send to u413"""
 	text = text.replace('\\',"\\\\")
-	text = text.replace('&quot;','''\\"''')
-	text = text.replace('&#160;','''\xc2\xa0''')
-	text = text.replace('&amp;','&')
+	text = text.replace('"','''\\"''')
 	return text
