@@ -1,0 +1,22 @@
+U413lib - A open-source python API for u413.
+
+
+Here is all you need to make a basic program:
+make sure you have BeutifulSoup
+
+#################Start######################
+
+import u413lib
+client = u413lib.createclient()
+client.login('username','password')
+chatter = client.joinchat('general')
+
+chatter.send('u413lib!')
+
+
+#################END########################
+Save it as uLibTest.py
+run it...
+And thats all!
+
+Any questions can be directed to jamezmcclain@gmail.com.
