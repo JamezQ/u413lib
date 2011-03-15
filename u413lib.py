@@ -106,7 +106,7 @@ class createclient(object):
 				return False
 		def send(self,chatstring):
 			"""Send string to chat chatter is in"""
-			chatstring = str(chatstring)
+			chatstring = unicode(chatstring)
 			chatstring = make_send_safe(chatstring)
 			cmd = "channel "
 			cmd += self.channel
